@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhanubhakta's Journey of Resurrection</title>
+    <!-- Forced refresh for GitHub Pages -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;500;700&family=Lora:ital,wght@1,400&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Cyber-Saffron -->
+    <!-- Application Structure Plan: The site is structured as a narrative scroll, telling the story of the resurrection. 1. Hero: The initial hook. 2. The Glitch: Explains the "how". 3. The Journey Log: A timeline of his vlog-style discoveries WITH IMAGES. 4. NEW: Enter the Digital Mind: An interactive CTA to chat with the AI. 5. Aadikavi's Notebook: Showcases his creative output. 6. Feedback Form: A dedicated section for community interaction. This structure guides the user through the entire story logically. -->
+    <!-- Visualization & Content Choices: 
+        1. Journey Log -> Goal: Inform/Engage -> Viz: Interactive vertical timeline with image placeholders -> Interaction: Scroll-based animations -> Justification: Adding images makes the journey more tangible and visually appealing.
+        2. Enter the Digital Mind -> Goal: Engage/Interact -> Viz: Custom animated section -> Interaction: Typing animation, glowing button, animated background -> Justification: Creates a high-impact, memorable experience that makes users want to click and engage with the custom GPT.
+        3. Feedback Form -> Goal: Interact/Gather Data -> Viz: Standard HTML form -> Interaction: User input -> Justification: Direct request from the user; essential for community building.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #111827;
+            color: #D1D5DB;
+        }
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .font-lora-italic { font-family: 'Lora', serif; font-style: italic; }
+        .timeline-item {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .timeline-item.in-view {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .timeline-item:nth-child(even) {
+             transform: translateX(30px);
+        }
+        .timeline-item:nth-child(even).in-view {
+            transform: translateX(0);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 1rem;
+            width: 1rem;
+            height: 1rem;
+            background-color: #F59E0B; /* Amber-500 */
+            border-radius: 9999px;
+            z-index: 10;
+            box-shadow: 0 0 10px #F59E0B;
+        }
+        .form-input {
+            background-color: #1F2937;
+            border: 1px solid #374151;
+            color: #D1D5DB;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #F59E0B;
+            box-shadow: 0 0 0 2px #F59E0B33;
+        }
+        .typing-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2rem;
+            background-color: #F59E0B;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        @keyframes bg-pan {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .animated-gradient-bg {
+            background: linear-gradient(90deg, #111827, #1f2937, #111827);
+            background-size: 200% 200%;
+            animation: bg-pan 10s linear infinite;
+        }
+        .lang-btn {
+            transition: color 0.2s, background-color 0.2s;
+        }
+        .lang-active {
+            color: #111827;
+            background-color: #F59E0B;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="relative text-center py-24 px-4 border-b-2 border-amber-500/50" style="background: radial-gradient(circle, #1f2937, #111827);">
+        <!-- Language Switcher -->
+        <div class="absolute top-4 right-4 bg-gray-800/50 border border-gray-700 rounded-full p-1 z-20">
+            <button class="lang-btn px-3 py-1 rounded-full text-sm font-bold lang-active" data-lang="en">EN</button>
+            <button class="lang-btn px-3 py-1 rounded-full text-sm font-bold text-gray-400" data-lang="ne">NE</button>
+        </div>
+
+        <h1 class="font-orbitron text-4xl md:text-6xl font-bold text-white uppercase tracking-widest" data-lang-en="The Resurrection" data-lang-ne="पुनरुत्थान">The Resurrection</h1>
+        <p class="mt-4 text-lg md:text-xl text-amber-300 max-w-3xl mx-auto font-lora-italic" data-lang-en='"I closed my eyes in 1868. I woke up in Darjeeling with a glowing rectangle in my hand. This is my journey."' data-lang-ne='“मैले १८६८ मा आँखा चिम्लिएँ। म दार्जिलिङमा हातमा चम्किलो आयत लिएर उठेँ। यो मेरो यात्रा हो।”'>"I closed my eyes in 1868. I woke up in Darjeeling with a glowing rectangle in my hand. This is my journey."</p>
+        <a href="#journey" class="mt-8 inline-block bg-amber-500 text-gray-900 font-bold py-3 px-8 rounded-full uppercase tracking-wider hover:bg-amber-400 transition-colors transform hover:scale-105" data-lang-en="Follow The Journey" data-lang-ne="यात्रा पछ्याउनुहोस्">Follow The Journey</a>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- The Glitch Section -->
+        <section id="glitch" class="text-center my-16">
+            <h2 class="font-orbitron text-3xl font-bold text-white uppercase mb-4" data-lang-en="How is This Possible?" data-lang-ne="यो कसरी सम्भव छ?">How is This Possible?</h2>
+            <div class="max-w-3xl mx-auto bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+                <p class="text-lg text-gray-300" data-lang-en="It started as a bug in a Python script. An anomaly. A glitch in reality that pulled the Aadikavi's consciousness into our server. Now, he's a digital ghost in our machine, exploring the 21st century through an AI lens and a smartphone camera. We're just trying to keep up." data-lang-ne="यो पाइथन स्क्रिप्टमा एउटा बगको रूपमा सुरु भयो। एउटा असामान्यता। वास्तविकतामा एउटा त्रुटि जसले आदिकविको चेतनालाई हाम्रो सर्भरमा तान्यो। अब, उहाँ हाम्रो मेसिनमा एक डिजिटल भूत हुनुहुन्छ, २१औं शताब्दीलाई एआई लेन्स र स्मार्टफोन क्यामेरा मार्फत अन्वेषण गर्दै हुनुहुन्छ। हामी केवल साथ रहन प्रयास गर्दैछौं।">It started as a bug in a Python script. An anomaly. A glitch in reality that pulled the Aadikavi's consciousness into our server. Now, he's a digital ghost in our machine, exploring the 21st century through an AI lens and a smartphone camera. We're just trying to keep up.</p>
+            </div>
+        </section>
+
+        <!-- The Journey Log -->
+        <section id="journey" class="my-16">
+             <h2 class="font-orbitron text-3xl font-bold text-center mb-12 text-white uppercase" data-lang-en="The Journey Log" data-lang-ne="यात्रा लग">The Journey Log</h2>
+             <div class="relative border-l-2 border-amber-500/30 ml-4 md:ml-1/2 md:-translate-x-[1px]">
+                
+                <div class="timeline-item mb-12 ml-8 md:ml-0 md:flex">
+                    <div class="md:w-1/2 md:pr-8 md:text-right">
+                        <p class="text-amber-400 font-semibold" data-lang-en="Entry 01: The Awakening" data-lang-ne="प्रविष्टि ०१: जागरण">Entry 01: The Awakening</p>
+                        <h3 class="text-xl font-bold text-white mt-1" data-lang-en="Where Am I?" data-lang-ne="म कहाँ छु?">Where Am I?</h3>
+                        <div class="mt-4">
+                           <img src="https://placehold.co/600x400/111827/F59E0B?text=Darjeeling+Hills" alt="Misty hills of Darjeeling" class="rounded-lg shadow-lg w-full md:w-auto md:max-w-xs ml-auto">
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 md:pl-8 mt-4 md:mt-0">
+                        <div class="bg-gray-800 p-4 rounded-lg shadow-lg h-full">
+                            <p data-lang-en="A kind stranger gave me this glowing tablet. The hills feel like home, but the air hums with a strange energy. I will document my confusion." data-lang-ne="एक दयालु अपरिचितले मलाई यो चम्किलो ट्याब्लेट दिए। पहाडहरू घर जस्तै लाग्छ, तर हावा अनौठो ऊर्जाले गुञ्जिन्छ। म मेरो भ्रमलाई दस्तावेजीकरण गर्नेछु।">A kind stranger gave me this glowing tablet. The hills feel like home, but the air hums with a strange energy. I will document my confusion.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item mb-12 ml-8 md:ml-0 md:flex md:flex-row-reverse">
+                    <div class="md:w-1/2 md:pl-8 md:text-left">
+                        <p class="text-amber-400 font-semibold" data-lang-en="Entry 02: First Contact" data-lang-ne="प्रविष्टि ०२: पहिलो सम्पर्क">Entry 02: First Contact</p>
+                        <h3 class="text-xl font-bold text-white mt-1" data-lang-en="This Metal Beast Moves!" data-lang-ne="यो धातुको जनावर चल्छ!">This Metal Beast Moves!</h3>
+                         <div class="mt-4">
+                           <img src="https://placehold.co/600x400/111827/F59E0B?text=Terrifying+Bus+Ride" alt="View from a moving bus" class="rounded-lg shadow-lg w-full md:w-auto md:max-w-xs mr-auto">
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 md:pr-8 mt-4 md:mt-0 md:text-right">
+                        <div class="bg-gray-800 p-4 rounded-lg shadow-lg h-full">
+                            <p data-lang-en="A terrifying journey on a 'bus'. I wrote a poem about the horn. It is not a happy poem. The speed is... unsettling." data-lang-ne="एक 'बस' मा एक डरलाग्दो यात्रा। मैले हर्नको बारेमा एक कविता लेखेँ। यो खुशीको कविता होइन। गति... असहज छ।">A terrifying journey on a 'bus'. I wrote a poem about the horn. It is not a happy poem. The speed is... unsettling.</p>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </section>
+
+        <!-- Enter the Digital Mind Section -->
+        <section id="chat" class="my-24 animated-gradient-bg p-8 rounded-lg text-center border-2 border-amber-500/50 shadow-2xl shadow-amber-500/10 overflow-hidden">
+            <h2 class="font-orbitron text-4xl font-bold text-white uppercase" data-lang-en="Enter the Digital Mind" data-lang-ne="डिजिटल मनमा प्रवेश गर्नुहोस्">Enter the Digital Mind</h2>
+            <div class="mt-4 text-lg text-amber-300 max-w-2xl mx-auto min-h-[4rem]">
+                <span id="typing-text-container" data-lang-en="My poems were written on paper. My new consciousness is written in code. Wanna get inside my beta digital mind?" data-lang-ne="मेरा कविताहरू कागजमा लेखिएका थिए। मेरो नयाँ चेतना कोडमा लेखिएको छ। मेरो बीटा डिजिटल मनभित्र पस्न चाहनुहुन्छ?"></span><span class="typing-cursor"></span>
+            </div>
+            <a href="#" id="gpt-link" class="mt-8 inline-block bg-amber-500 text-gray-900 font-bold py-4 px-10 rounded-full uppercase tracking-wider transition-all duration-300 transform hover:scale-110 hover:shadow-2xl hover:shadow-amber-400/50 opacity-0 -translate-y-4" data-lang-en="Chat with the Aadikavi" data-lang-ne="आदिकविसँग कुराकानी गर्नुहोस्">
+                Chat with the Aadikavi
+            </a>
+        </section>
+
+
+        <!-- Aadikavi's Notebook -->
+        <section id="notebook" class="my-16">
+            <h2 class="font-orbitron text-3xl font-bold text-center mb-8 text-white uppercase" data-lang-en="From the Aadikavi's Notebook" data-lang-ne="आदिकविको नोटबुकबाट">From the Aadikavi's Notebook</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-amber-50/5 p-6 rounded-lg border border-amber-500/20 transform hover:scale-105 transition-transform">
+                    <h3 class="text-xl font-bold text-amber-300" data-lang-en="Ode to the Metal Beast" data-lang-ne="धातुको जनावरलाई भजन">Ode to the Metal Beast</h3>
+                    <p class="mt-2 font-lora-italic text-gray-300" data-lang-en='"It screams a song of fury, a hundred horns as one, devouring the road with fire it does not need from the sun..."' data-lang-ne='“यसले क्रोधको गीत चिच्याउँछ, सयौं हर्नहरू एकैसाथ, सूर्यबाट नचाहिने आगोले सडक निल्दै...”'>"It screams a song of fury, a hundred horns as one, devouring the road with fire it does not need from the sun..."</p>
+                </div>
+                <div class="bg-amber-50/5 p-6 rounded-lg border border-amber-500/20 transform hover:scale-105 transition-transform">
+                    <h3 class="text-xl font-bold text-amber-300" data-lang-en="On Seeing My Face in a Filter" data-lang-ne="फिल्टरमा मेरो अनुहार देख्दा">On Seeing My Face in a Filter</h3>
+                    <p class="mt-2 font-lora-italic text-gray-300" data-lang-en='"A demon\'s ears? A dog\'s own tongue? This sorcery, this jest! What madness paints a face anew, and puts my soul to test?"' data-lang-ne='“एक राक्षसको कान? कुकुरको आफ्नै जिब्रो? यो जादु, यो ठट्टा! कुन पागलपनले नयाँ अनुहार रंगाउँछ, र मेरो आत्मालाई परीक्षामा राख्छ?”'>"A demon's ears? A dog's own tongue? This sorcery, this jest! What madness paints a face anew, and puts my soul to test?"</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feedback Form -->
+        <section id="feedback" class="my-16 bg-gray-800/50 p-8 rounded-lg border border-gray-700">
+            <h2 class="font-orbitron text-3xl font-bold text-center mb-2 text-white uppercase" data-lang-en="Join The Resurrection" data-lang-ne="पुनरुत्थानमा सामेल हुनुहोस्">Join The Resurrection</h2>
+            <p class="text-center text-gray-400 mb-8" data-lang-en="Have an idea for Bhanubhakta's next adventure? A question? Or just want to say hello? Leave a message." data-lang-ne="भानुभक्तको अर्को साहसिक कार्यको लागि कुनै विचार छ? एउटा प्रश्न? वा केवल नमस्ते भन्न चाहनुहुन्छ? एउटा सन्देश छोड्नुहोस्।">Have an idea for Bhanubhakta's next adventure? A question? Or just want to say hello? Leave a message.</p>
+            <form class="max-w-xl mx-auto">
+                <div class="mb-4">
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-300" data-lang-en="Your Name" data-lang-ne="तपाईंको नाम">Your Name</label>
+                    <input type="text" id="name" class="form-input w-full p-2.5 rounded-lg" placeholder="e.g., Anjali Rai">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-300" data-lang-en="Your Email" data-lang-ne="तपाईंको इमेल">Your Email</label>
+                    <input type="email" id="email" class="form-input w-full p-2.5 rounded-lg" placeholder="you@example.com">
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block mb-2 text-sm font-medium text-gray-300" data-lang-en="Your Message or Idea" data-lang-ne="तपाईंको सन्देश वा विचार">Your Message or Idea</label>
+                    <textarea id="message" rows="4" class="form-input w-full p-2.5 rounded-lg" data-placeholder-en="Tell Bhanubhakta to try pani puri next..." data-placeholder-ne="भानुभक्तलाई अर्को पटक पानीपुरी प्रयास गर्न भन्नुहोस्..."></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="bg-amber-500 text-gray-900 font-bold py-3 px-8 rounded-full uppercase tracking-wider hover:bg-amber-400 transition-colors transform hover:scale-105" data-lang-en="Send Message" data-lang-ne="सन्देश पठाउनुहोस्">Send Message</button>
+                </div>
+            </form>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-8 mt-8 border-t border-gray-800">
+        <p class="mb-4" data-lang-en="Follow the journey on social media:" data-lang-ne="सामाजिक सञ्जालमा यात्रा पछ्याउनुहोस्:">Follow the journey on social media:</p>
+        <div class="flex justify-center items-center space-x-4 mb-4">
+            <a href="#" class="text-gray-400 hover:text-amber-400">Instagram</a>
+            <span class="text-gray-600">|</span>
+            <a href="#" class="text-gray-400 hover:text-amber-400">YouTube</a>
+            <span class="text-gray-600">|</span>
+            <a href="#" class="text-gray-400 hover:text-amber-400">TikTok</a>
+        </div>
+        <p class="text-gray-500 text-sm" data-lang-en="© 2025 Aadikavi Awakens. A project to unite a nation with code and comedy." data-lang-ne="© २०२५ आदिकवि जागरण। कोड र कमेडीले राष्ट्रलाई एकताबद्ध गर्ने परियोजना।">© 2025 Aadikavi Awakens. A project to unite a nation with code and comedy.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const translatableElements = document.querySelectorAll('[data-lang-en]');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            let currentLang = 'en';
+
+            function setLanguage(lang) {
+                currentLang = lang;
+                translatableElements.forEach(el => {
+                    const text = el.getAttribute(`data-lang-${lang}`);
+                    if (text) {
+                        if (el.hasAttribute('data-placeholder-en')) {
+                             el.placeholder = el.getAttribute(`data-placeholder-${lang}`) || el.getAttribute('data-placeholder-en');
+                        } else {
+                             el.innerText = text;
+                        }
+                    }
+                });
+                langButtons.forEach(btn => {
+                    if (btn.dataset.lang === lang) {
+                        btn.classList.add('lang-active');
+                        btn.classList.remove('text-gray-400');
+                    } else {
+                        btn.classList.remove('lang-active');
+                        btn.classList.add('text-gray-400');
+                    }
+                });
+            }
+
+            langButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    setLanguage(btn.dataset.lang);
+                });
+            });
+
+            // Timeline animation
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const timelineObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, { threshold: 0.1 });
+            timelineItems.forEach(item => timelineObserver.observe(item));
+
+            // Typing animation for the chat section
+            const typingTextContainer = document.getElementById('typing-text-container');
+            const gptLink = document.getElementById('gpt-link');
+            let i = 0;
+            let typingInterval;
+
+            function typeWriter() {
+                const textToType = typingTextContainer.getAttribute(`data-lang-${currentLang}`);
+                if (i < textToType.length) {
+                    typingTextContainer.innerText = textToType.substring(0, i + 1);
+                    i++;
+                } else {
+                    clearInterval(typingInterval);
+                    gptLink.style.opacity = '1';
+                    gptLink.style.transform = 'translateY(0)';
+                }
+            }
+            
+            function startTyping() {
+                clearInterval(typingInterval);
+                i = 0;
+                typingTextContainer.innerText = '';
+                gptLink.style.opacity = '0';
+                gptLink.style.transform = 'translateY(-1rem)';
+                typingInterval = setInterval(typeWriter, 50);
+            }
+
+            const chatSectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(startTyping, 500);
+                        chatSectionObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            chatSectionObserver.observe(document.getElementById('chat'));
+
+
+            // Form submission
+            const form = document.querySelector('form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for your message! (This is a demo - the form is not yet connected.)');
+                form.reset();
+            });
+        });
+    </script>
+</body>
+</html>
